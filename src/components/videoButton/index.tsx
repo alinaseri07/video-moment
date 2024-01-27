@@ -7,13 +7,7 @@ const Button: React.FC = () => {
     dispatch,
   } = useAppContext();
 
-  const renderIcon = () => {
-    if (playerState === "paused") {
-      return <div className={styles["play-icon"]} />;
-    }
-    return <div className={styles["pause-icon"]} />;
-  };
-
+  const icon = playerState === "paused" ? "play-icon" : "pause-icon";
   const play = () => dispatch({ type: "SET_PLAYER_STATE", payload: "playing" });
   const pause = () => dispatch({ type: "SET_PLAYER_STATE", payload: "paused" });
 
@@ -22,7 +16,7 @@ const Button: React.FC = () => {
 
   return (
     <button className={styles["button"]} onClick={handleChangePlayerState}>
-      {renderIcon()}
+      <div className={styles[icon]} />
     </button>
   );
 };
