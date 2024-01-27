@@ -7,16 +7,26 @@
   .markers-wrapper {
     position: absolute;
     left: 0;
-    top: 0;
+    top: -15px;
     width: 100%;
-    height: 13px;
+    height: 20px;
     z-index: 8;
 
     .marker {
       position: absolute;
       height: 100%;
-      width: 3px;
-      background-color: red;
+      width: 20px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 1px;
+        height: 100%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background-color: red;
+      }
 
       &:hover::after {
         content: attr(data-comment);

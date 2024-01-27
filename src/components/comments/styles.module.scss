@@ -1,4 +1,42 @@
-/* Styles for the form */
+.comments-wrapper {
+  width: 100%;
+  height: 100px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid lightgray;
+  position: relative;
+  padding: 20px 10px;
+
+  .title {
+    padding: 5px;
+    position: absolute;
+    top: -17px;
+    left: 10px;
+    background: white;
+  }
+}
+
+.add-comment-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  outline: none;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+  }
+}
+
 .form-container {
   max-width: 400px;
   margin: 20px auto;
@@ -7,31 +45,29 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-}
 
-/* Styles for the input field */
-.form-container input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
 
-/* Styles for the submit button */
-.form-container button[type="submit"] {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  box-sizing: border-box;
-}
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    box-sizing: border-box;
 
-.form-container button[type="submit"]:hover {
-  background-color: #0056b3;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
 }

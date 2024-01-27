@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useAppContext } from "../../context";
 import Modal from "../modal";
-import styles from "./styles.module.scss";
 import formatTime from "../../utils/formatTime";
+import styles from "./styles.module.scss";
 
 const Comments: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -12,15 +12,18 @@ const Comments: React.FC = () => {
     dispatch,
   } = useAppContext();
 
+  const play = () => dispatch({ type: "SET_PLAYER_STATE", payload: "playing" });
+  const pause = () => dispatch({ type: "SET_PLAYER_STATE", payload: "paused" });
+
   const handleShowModal = () => {
-    dispatch({ type: "SET_PLAYER_STATE", payload: "paused" });
+    pause();
     playerCurrentTime.current = Math.floor(playerRef?.currentTime || 0);
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
-    dispatch({ type: "SET_PLAYER_STATE", payload: "playing" });
     setShowModal(false);
+    play();
   };
 
   const handleSubmitComment = (event: React.FormEvent<HTMLFormElement>) => {
@@ -36,20 +39,28 @@ const Comments: React.FC = () => {
 
   return (
     <div>
-      {activeComment?.map((comment) => (
-        <div key={comment.id}>
-          {formatTime(comment.timestamp)} - {comment.text}
-        </div>
-      ))}
+      <div className={styles["comments-wrapper"]}>
+        <p className={styles["title"]}>Moment Quotes</p>
+        {activeComment?.map((comment) => (
+          <div key={comment.id} className={styles["comment"]}>
+            {formatTime(comment.timestamp)} - {comment.text}
+          </div>
+        ))}
+      </div>
 
-      <button onClick={handleShowModal}>add comment</button>
+      <button
+        className={styles["add-comment-button"]}
+        onClick={handleShowModal}
+      >
+        Add Your Quote
+      </button>
 
       <Modal onClose={handleCloseModal} show={showModal}>
         <form
           onSubmit={handleSubmitComment}
           className={styles["form-container"]}
         >
-          <input name="comment" type="text" placeholder="Enter your comment" />
+          <input name="comment" type="text" placeholder="Enter your quote" />
           <button type="submit">Submit</button>
         </form>
       </Modal>

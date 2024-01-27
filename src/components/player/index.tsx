@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { useAppContext } from "../../context";
 import Seekbar from "../seekbar";
-import Button from "../button";
+import Button from "../videoButton";
 import Timer from "../timer";
 import styles from "./styles.module.scss";
+
+const messageDelay = 1; //delay second
 
 const Player: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -21,18 +23,20 @@ const Player: React.FC = () => {
   };
 
   const handleTimeUpdate = () => {
-    if (videoRef.current) {
-      const videoCurrentTime = Math.floor(videoRef.current.currentTime);
-      setCurrentTime(videoCurrentTime);
+    if (!videoRef.current) return;
 
-      const foundComment = comments.filter(
-        (comment) => comment.timestamp === videoCurrentTime
-      );
-      if (foundComment.length) {
-        dispatch({ type: "SET_ACTIVE_COMMENT", payload: foundComment });
-      } else if (!foundComment.length && activeComment) {
-        dispatch({ type: "SET_ACTIVE_COMMENT", payload: null });
-      }
+    const videoCurrentTime = Math.floor(videoRef.current.currentTime);
+    setCurrentTime(videoCurrentTime);
+
+    const foundComments = comments.filter(
+      (comment) =>
+        comment.timestamp === videoCurrentTime ||
+        comment.timestamp + messageDelay === videoCurrentTime
+    );
+
+    const newActiveComment = foundComments.length ? foundComments : null;
+    if (newActiveComment !== activeComment) {
+      dispatch({ type: "SET_ACTIVE_COMMENT", payload: newActiveComment });
     }
   };
 
@@ -50,13 +54,13 @@ const Player: React.FC = () => {
     if (!playerRef) {
       dispatch({ type: "SET_PLAYER_REF", payload: videoRef.current });
     }
-  }, []);
+  }, [dispatch, playerRef]);
 
   useEffect(() => {
     if (playerRef) {
       playerState === "playing" ? playerRef.play() : playerRef.pause();
     }
-  }, [dispatch, playerRef, playerState, videoRef]);
+  }, [playerRef, playerState]);
 
   return (
     <div className={styles["player-wrapper"]}>
