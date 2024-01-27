@@ -31,6 +31,7 @@ const Player: React.FC = () => {
     const foundComments = comments.filter(
       (comment) =>
         comment.timestamp === videoCurrentTime ||
+        comment.timestamp - messageDelay === videoCurrentTime ||
         comment.timestamp + messageDelay === videoCurrentTime
     );
 
