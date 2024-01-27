@@ -1,0 +1,41 @@
+button {
+  background-color: transparent;
+}
+
+/* Play Icon */
+.play-icon {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 20px;
+  border-color: transparent transparent transparent #ffffff;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Pause Icon */
+.pause-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.pause-icon::before,
+.pause-icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background: #ffffff;
+}
+
+.pause-icon::before {
+  left: 4px;
+}
+
+.pause-icon::after {
+  right: 4px;
+}

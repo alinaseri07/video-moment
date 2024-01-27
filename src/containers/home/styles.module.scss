@@ -1,0 +1,23 @@
+.container {
+  margin: 0 auto;
+  padding: 15px;
+  box-sizing: border-box;
+
+  // Default width for small screens
+  width: 100%;
+
+  // Medium screens (e.g., tablets)
+  @media (min-width: 768px) {
+    width: 750px;
+  }
+
+  // Large screens (e.g., desktops)
+  @media (min-width: 992px) {
+    width: 970px;
+  }
+
+  // Extra large screens (e.g., large desktops)
+  @media (min-width: 1200px) {
+    width: 1170px;
+  }
+}
